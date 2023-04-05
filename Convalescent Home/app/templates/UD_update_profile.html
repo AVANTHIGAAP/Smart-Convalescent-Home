@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Edit_Profile</title>
+	 <link rel = "icon" href ="static/images/logo.png" type = "image/x-icon">
+<style>
+	.dropdown:hover>.dropdown-menu{
+		display:block;
+	}
+	
+	
+</style>
+<script language="JavaScript">
+	function profile_update() {
+		
+		var state = "{{ data[3] }}";
+		var city = "{{ data[4] }}";
+		populate("state","city",state,city);
+		var gender = "{{ data[5] }}"
+		document.getElementById(gender).checked = true; 		
+	}
+	
+</SCRIPT>
+
+  
+  
+		
+  <!-- Bootstrap core CSS 
+  <link href="bootstrap.min.css" rel="stylesheet">-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+  <!-- Custom styles for this template -->
+  <link href="static/css/simple-sidebar.css" rel="stylesheet">
+  <script src="static/js/states.js"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body style="background-color:#e9ecef69" onload="javascript:profile_update()">
+{% from "includes/_formhelpers.html" import render_field %} 
+  <div class="d-flex" id="wrapper">
+
+    <!-- Sidebar -->
+    <div class="bg-light border-right" id="sidebar-wrapper">
+      <div class="sidebar-heading" style="color:#6400aa;font-family:serif;"><h4>User Dashboard</h4></div>
+      <div class="list-group list-group-flush ">
+        <a href="http://127.0.0.1:5000/user_dashboard?navigate_id=user_dashboard" class="list-group-item list-group-item-action bg-light ">Dashboard</a>
+        <a href="http://127.0.0.1:5000/department_page" class="list-group-item list-group-item-action bg-light">Book Appointment</a>
+        <a href="/appointment_history" class="list-group-item list-group-item-action bg-light">Appointment History</a>
+		<a href="/view_prescrptions" class="list-group-item list-group-item-action bg-light">Prescription History</a>
+      </div>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+        <button class="btn btn-primary" id="menu-toggle"><i class="fa fa-bars" style="color:white"></i></button>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+            
+            <li class="nav-item">
+              <a class="nav-link" href="#"><h3><span style="color:#6400aa;font-family:serif">Hospital Management System</h3></a>
+            </li>
+			
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="fa-stack fa-2x"> <i class="fa fa-square fa-stack-2x text-primary"></i> <i class="fa fa-user fa-stack-1x fa-inverse"></i> </span>
+				<span style="font-size:20px;color:#640000">{{ session['username'] }}</span></a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="http://127.0.0.1:5000/update_form">My Profile</a>
+                <a class="dropdown-item" href="/update_password" >Change Password</a>
+				<a class="dropdown-item" href="/logout" >Logout</a>
+            </li>
+			 <li class="nav-item">
+              <a class="nav-link" href="#"></a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+ {% include 'includes/_messages.html' %}
+	  
+
+<!-- Profile Update-->
+<div>
+ <section id="page-title">
+							<div class="row">
+								<div class="col-sm-8">
+								<br>
+									<h4 class="mainTitle">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Edit_Profile</h4>
+	                            </div>
+							</div>
+						</section>
+
+				  <br>
+				<br>
+
+<div style="padding-left:300px;padding-right:300px">
+<div class="container" style="background-color:white; border: 1px solid green;">
+
+	<form action="/update_userform" method="post">
+	<br>
+	<div class="form-group row">
+	<div class="col-sm-3">
+	</div>
+	
+	<h4>&nbsp;&nbsp;&nbsp;&nbsp;Update your Details</h4>
+	</div>
+	  <div class="form-group row">
+		<label class="control-label col-sm-3" for="fullname">FullName:</label>
+		<div class="col-sm-8">
+		  {{render_field(form1.fullname, class_="form-control" ,placeholder="FullName")}}
+		</div>
+	  </div>
+	  
+	  <div class="form-group row">
+		<label class="control-label col-sm-3"  for="email">EmailId:</label>
+		<div class="col-sm-8">
+		  {{render_field(form1.email, class_="form-control" ,placeholder="Email Address")}}
+		</div>
+	  </div>
+	  
+	  <div class="form-group row">
+		<label class="control-label col-sm-3"  for="gender" >Gender:</label>
+		<div class="col-sm-8">
+			<label class="radio-inline"><input type="radio" name="optgender" value="Male" id="Male" checked>Male</label>
+			<label class="radio-inline"><input type="radio" name="optgender" value="Female" id="Female">Female</label>
+		</div>
+	  </div>
+	  <div class="form-group row">
+		<label class="control-label col-sm-3"  for="dob" >DOB:</label>
+		<div class="col-sm-8">
+		  <input type="date" class="form-control" name="date" placeholder="Date of Birth" value="{{ data[13] }}">
+		</div>
+	  </div>
+	  
+	  <div class="form-group row">
+		<label class="control-label col-sm-3"  for="password">Password:</label>
+		<div class="col-sm-8">
+		  <input type="password" readonly class="form-control" id="password" placeholder="Password" value="some text">
+		</div>
+	  </div>
+	  
+	  <div class="form-group row">
+		<label class="control-label col-sm-3"  for="contactno">ContactNo:</label>
+		<div class="col-sm-8">
+		  {{render_field(form1.contactno, class_="form-control" ,placeholder="Contact Number")}}
+		</div>
+	  </div>
+	  
+	  <div class="form-group row">
+		<label class="control-label col-sm-3"  for="Address">Address:</label>
+		<div class="col-sm-8">
+		  {{render_field(form1.address, class_="form-control" ,placeholder="Address")}}
+		</div>
+	  </div>
+	  
+	  <div class="form-group row">
+		<label class="control-label col-sm-3"  for="state">State:</label>
+		<div class="col-sm-8">
+		  <select id="state" name="state" onchange="populate(this.id,'city','null','null')" class="form-control" >
+					<option value="">--SELECT--</option>
+					<option value="AndhraPradesh">Andhra Pradesh</option>
+					<option value="ArunachalPradesh">Arunachal Pradesh</option>
+					<option value="Assam">Assam</option>
+					<option value="Bihar">Bihar</option>
+					<option value="Gujarat">Gujarat</option>
+					<option value="Haryana">Haryana</option>
+					<option value="HimachalPradesh">Himachal Pradesh</option>
+					<option value="JammuandKashmir">Jammu and Kashmir</option>
+					<option value="Jharkhand">Jharkhand</option>
+					<option value="Karnataka">Karnataka</option>
+					<option value="Kerala">Kerala</option>
+					<option value="MadhyaPradesh">Madhya Pradesh</option>
+					<option value="Maharashtra">Maharashtra</option>
+					<option value="Manipur">Manipur</option>
+					<option value="Meghalaya">Meghalaya</option>
+					<option value="Mizoram">Mizoram</option>
+					<option value="Nagaland">Nagaland</option>
+					<option value="Orissa">Orissa</option>
+					<option value="Punjab">Punjab</option>
+					<option value="Rajasthan">Rajasthan</option>
+					<option value="Sikkim">Sikkim</option>
+					<option value="TamilNadu">Tamil Nadu</option>
+					<option value="Telangana">Telangana</option>
+					<option value="Tripura">Tripura</option>
+					<option value="UttarPradesh">Uttar Pradesh</option>
+					<option value="Uttarakhand">Uttarakhand</option>
+					<option value="WestBengal">West Bengal</option>
+				</select>
+		</div>
+	  </div>
+	  
+	  <div class="form-group row">
+		<label class="control-label col-sm-3"  for="city">City:</label>
+		<div class="col-sm-8">
+		   <select id="city" name="city" class="form-control">
+                     </select>
+		</div>
+	  </div>
+	  
+	  <div class="form-group row">
+		<label class="control-label col-sm-4"  for=""></label>
+		<div class="col-sm-8">
+		  <input type="submit" name="update" value="Update" class="btn btn-success"/>
+		</div>
+	  </div>
+	  
+	</form>
+</div>       
+ <div>
+
+<!--End of Form div--> 
+</div>
+<!-- End Of Profile Update-->
+
+ </div>
+    <!-- /#page-content-wrapper -->
+
+  </div>
+  <!-- /#wrapper -->
+
+  <!-- Bootstrap core JavaScript 
+  <script src="jquery.min.js"></script>-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="static/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Menu Toggle Script -->
+  <script>
+    $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+    });
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Departments_Page</title>
+	 <link rel = "icon" href ="static/images/logo.png" type = "image/x-icon">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  
+<style>
+	.dropdown:hover>.dropdown-menu{
+		display:block;
+	}
+		
+</style>
+
+  
+  
+		
+  <!-- Bootstrap core CSS 
+  <link href="bootstrap.min.css" rel="stylesheet">-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+  <!-- Custom styles for this template -->
+  <link href="static/css/simple-sidebar.css" rel="stylesheet">
+  <script src="static/js/states.js"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body style="background-color:#e9ecef69" >
+
+  <div class="d-flex" id="wrapper">
+
+    <!-- Sidebar -->
+    <div class="bg-light border-right" id="sidebar-wrapper">
+<div class="sidebar-heading" style="color:#6400aa;font-family:serif;"><h4>User Dashboard</h4></div>
+      <div class="list-group list-group-flush ">
+        <a href="http://127.0.0.1:5000/user_dashboard?navigate_id=user_dashboard" class="list-group-item list-group-item-action bg-light ">Dashboard</a>
+        <a href="/department_page" class="list-group-item list-group-item-action bg-light">Book Appointment</a>
+        <a href="/appointment_history" class="list-group-item list-group-item-action bg-light">Appointment History</a>
+		<a href="/view_prescrptions" class="list-group-item list-group-item-action bg-light">Prescription History</a>
+      </div>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+        <button class="btn btn-primary" id="menu-toggle"><i class="fa fa-bars" style="color:white"></i></button>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+            
+            <li class="nav-item">
+              <a class="nav-link" href="#"><h3><span style="color:#6400aa;font-family:serif">Hospital Management System</h3></a>
+            </li>
+			
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="fa-stack fa-2x"> <i class="fa fa-square fa-stack-2x text-primary"></i> <i class="fa fa-user fa-stack-1x fa-inverse"></i> </span>
+				<span style="font-size:20px;color:#640000">{{ session['username'] }}</span></a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="http://127.0.0.1:5000/update_form">My Profile</a>
+                <a class="dropdown-item" href="/update_password" >Change Password</a>
+				<a class="dropdown-item" href="/logout" >Logout</a>
+            </li>
+			 <li class="nav-item">
+              <a class="nav-link" href="#"></a>
+            </li> 
+          </ul>
+        </div>
+      </nav>
+ {% include 'includes/_messages.html' %}
+	  
+
+  <!--departments session starts here-->
+  <br>
+  <div class="container">
+  <center><i><h4>Center of Excellence</h4></i></center><br>
+  <marquee behavior="alternate" scrollamount="7"><h5 style="color:purple"><i>Select the excellence you need to book for an appointment </i></h5></marquee>
+<br>
+<br> 
+ 
+    <div class="row">
+	{% for row in data %}
+	
+         <div class="col-md-3">
+         <center><a href="http://127.0.0.1:5000/departments_data/{{ row[0] }}">
+		 
+          <img src="static/images/{{ row[2] }}" alt="Lights" class="rounded-circle" style="height:100px;width:100px; background-color:yellow">
+          
+		  <i><h4 style="color:black">{{ row[1] }}</h4></i>
+        </a></center>
+		<br><br><br>
+		</div>
+      
+    {% endfor %}
+	
+	 </div>
+  </div>
+  <!--End of departments section-->
+  
+  
+  
+  
+  
+
+ </div>
+    <!-- /#page-content-wrapper -->
+
+  </div>
+  <!-- /#wrapper -->
+
+  <!-- Bootstrap core JavaScript 
+  <script src="jquery.min.js"></script>-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="static/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Menu Toggle Script -->
+  <script>
+    $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+    });
+  </script>
+
+  
+  
+  
+</body>
+
+</html>
+

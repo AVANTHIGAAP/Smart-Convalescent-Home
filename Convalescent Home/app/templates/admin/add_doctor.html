@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Add_Doctor</title>
+  <link rel = "icon" href ="/static/images/logo.png" type = "image/x-icon">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+ 
+<style>
+	.dropdown:hover>.dropdown-menu{
+		display:block;
+	}
+	
+	
+</style>
+
+  
+		
+  <!-- Bootstrap core CSS 
+  <link href="bootstrap.min.css" rel="stylesheet">-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+  <!-- Custom styles for this template -->
+  <link href="static/css/simple-sidebar.css" rel="stylesheet">
+  <script src="static/js/states.js"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body style="background-color:#e9ecef69">
+
+
+  
+{% from "includes/_formhelpers.html" import render_field %} 
+  <div class="d-flex" id="wrapper">
+
+    <!-- Sidebar -->
+      <div class="bg-light border-right" id="sidebar-wrapper">
+      <div class="sidebar-heading" style="color:#6400aa;font-family:serif;"><h4>Admin Dashboard</h4></div>
+      <div class="list-group list-group-flush ">
+        <a href="/admin_dashboard" class="list-group-item list-group-item-action bg-light ">Dashboard</a>
+		<a href="#departments" class="list-group-item list-group-item-action bg-light" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Specalizations
+                &emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;<i class="fa fa-caret-down" aria-hidden="true"></i></a>
+					<ul class="collapse list-unstyled" id="departments">
+                        
+                        <li>
+                            <a href="/add_department" class="list-group-item list-group-item-action bg-light">&emsp;&emsp;Add Specalization</a>
+                        </li>
+						
+                        <li>
+                            <a href="/manage_departments" class="list-group-item list-group-item-action bg-light">&emsp;&emsp;Manage Specalizations</a>
+                        </li>
+                    </ul>
+		<a href="#doctors" class="list-group-item list-group-item-action bg-light" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Doctors
+                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<i class="fa fa-caret-down" aria-hidden="true"></i></a>
+					<ul class="collapse list-unstyled" id="doctors">
+                        
+                        <li>
+                            <a href="/add_doctor" class="list-group-item list-group-item-action bg-light">&emsp;&emsp;Add Doctor</a>
+                        </li>
+						
+                        <li>
+                            <a href="/manage_doctors" class="list-group-item list-group-item-action bg-light">&emsp;&emsp;Manage Doctors</a>
+                        </li>
+                    </ul>
+		<a href="#patients" class="list-group-item list-group-item-action bg-light" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"> Patients
+   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<i class="fa fa-caret-down" aria-hidden="true"></i></a>
+					<ul class="collapse list-unstyled" id="patients">
+                        <li>
+                            <a href="/manage_patients" class="list-group-item list-group-item-action bg-light">&emsp;&emsp; Manage Patients</a>
+                        </li>
+     
+                    </ul>
+			<a href="/manage_appointments" class="list-group-item list-group-item-action bg-light">Appointment History</a>
+		 <a href="/DoctorSessionLogs" class="list-group-item list-group-item-action bg-light">Doctor Session Logs</a>
+		  <a href="/UserSessionLogs" class="list-group-item list-group-item-action bg-light">Patient Session Logs</a>
+		   <a href="/contactus_list" class="list-group-item list-group-item-action bg-light">User Comments Logs</a>
+      </div>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+        <button class="btn btn-primary" id="menu-toggle"><i class="fa fa-bars" style="color:white"></i></button>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+            
+            <li class="nav-item">
+              <a class="nav-link" href="#"><h3><span style="color:#6400aa;font-family:serif">Hospital Management System</h3></a>
+            </li>
+			
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="fa-stack fa-2x"> <i class="fa fa-square fa-stack-2x text-primary"></i> <i class="fa fa-user fa-stack-1x fa-inverse"></i> </span>
+				<span style="font-size:20px;color:#640000">Admin</span></a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="" onclick="update_password();return false;" >Change Password</a>
+				<a class="dropdown-item" href="/logout" >Logout</a></div>
+            </li>
+			 <li class="nav-item">
+              <a class="nav-link" href="#"></a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+ {% include 'includes/_messages.html' %}
+	  
+
+	<!-- Profile Update-->
+<div>
+ <section id="page-title">
+							<div class="row">
+								<div class="col-sm-8">
+								<br>
+									<h4 class="mainTitle">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ title }}_Profile</h4>
+	                            </div>
+							</div>
+						</section>
+
+				  <br>
+				<br>
+
+<div style="padding-left:200px;padding-right:300px">
+
+<div class="container" style="background-color:white; border: 1px solid green">
+
+	<form action="{{ form_action }}" method="post">
+	<br>
+	<div class="form-group row">
+	<div class="col-sm-3">
+	</div>
+	
+	<h4>&nbsp;&nbsp;&nbsp;&nbsp;{{ title }} your Details</h4>
+	</div>
+	<div class="form-group row">
+		<label class="control-label col-sm-4"  for="state">Doctor Specalization:</label>
+		<div class="col-sm-7">
+			<select id="dept_data"  name="department_id" class="form-control">
+				<option value="">--SELECT--</option>
+					{% for row in departments_data %}
+						<option value="{{ row[0] }}">{{ row[1] }}</option>  
+					{% endfor %}
+			</select>
+		</div>
+	  </div>
+	  
+	  <div class="form-group row">
+		<label class="control-label col-sm-4" for="fullname">Doctor Name:</label>
+		<div class="col-sm-7">
+		  {{render_field(form.doctorname, class_="form-control" ,placeholder="FullName")}}
+		</div>
+	  </div>
+	  
+	  <div class="form-group row">
+		<label class="control-label col-sm-4"  for="email">Consultancy Fee:</label>
+		<div class="col-sm-7">
+		  {{render_field(form.fee, class_="form-control" ,placeholder="Consultancy fee")}}
+		</div>
+	  </div>
+	  
+	  <div class="form-group row">
+		<label class="control-label col-sm-4"  for="contactno">Contact Number:</label>
+		<div class="col-sm-7">
+		  {{render_field(form.contactno, class_="form-control" ,placeholder="Contact Number")}}
+		</div>
+	  </div>
+	  
+	  <div class="form-group row">
+		<label class="control-label col-sm-4"  for="email">Email Address:</label>
+		<div class="col-sm-7">
+		  <input type="text" name="email" class="form-control" value="{{ data[4] }}" placeholder="Enter Email Address">
+		</div>
+	  </div>
+	  
+	  {% if title == "Add" %} 
+		<div class="form-group row">
+		<label class="control-label col-sm-4"  for="newpass">New Password:</label>
+		<div class="col-sm-7">
+		  {{render_field(form.newpass, class_="form-control" ,placeholder="Enter New Password")}}
+		</div>
+	  </div>
+	  
+	  <div class="form-group row">
+		<label class="control-label col-sm-4"  for="confpass">Confirm Password:</label>
+		<div class="col-sm-7">
+		 {{render_field(form.confpass, class_="form-control" ,placeholder="Confirm password")}}
+		</div>
+	  </div>
+	  {% endif %}
+	  
+	  
+	  
+	  <div class="form-group row">
+		<label class="control-label col-sm-4"  for="Address">Address:</label>
+		<div class="col-sm-7">
+		  {{render_field(form.address, class_="form-control" ,placeholder="Address")}}
+		</div>
+	  </div>
+	  
+	  <div class="form-group row">
+		<label class="control-label col-sm-4"  for="state">State:</label>
+		<div class="col-sm-7">
+		  <select id="state" name="state" onchange="populate(this.id,'city','null','null')" class="form-control" >
+					<option value="">--SELECT--</option>
+					<option value="AndhraPradesh">Andhra Pradesh</option>
+					<option value="ArunachalPradesh">Arunachal Pradesh</option>
+					<option value="Assam">Assam</option>
+					<option value="Bihar">Bihar</option>
+					<option value="Gujarat">Gujarat</option>
+					<option value="Haryana">Haryana</option>
+					<option value="HimachalPradesh">Himachal Pradesh</option>
+					<option value="JammuandKashmir">Jammu and Kashmir</option>
+					<option value="Jharkhand">Jharkhand</option>
+					<option value="Karnataka">Karnataka</option>
+					<option value="Kerala">Kerala</option>
+					<option value="MadhyaPradesh">Madhya Pradesh</option>
+					<option value="Maharashtra">Maharashtra</option>
+					<option value="Manipur">Manipur</option>
+					<option value="Meghalaya">Meghalaya</option>
+					<option value="Mizoram">Mizoram</option>
+					<option value="Nagaland">Nagaland</option>
+					<option value="Orissa">Orissa</option>
+					<option value="Punjab">Punjab</option>
+					<option value="Rajasthan">Rajasthan</option>
+					<option value="Sikkim">Sikkim</option>
+					<option value="TamilNadu">Tamil Nadu</option>
+					<option value="Telangana">Telangana</option>
+					<option value="Tripura">Tripura</option>
+					<option value="UttarPradesh">Uttar Pradesh</option>
+					<option value="Uttarakhand">Uttarakhand</option>
+					<option value="WestBengal">West Bengal</option>
+				</select>
+		</div>
+	  </div>
+	  
+	  <div class="form-group row">
+		<label class="control-label col-sm-4"  for="city">City:</label>
+		<div class="col-sm-7">
+		   <select id="city" name="city" class="form-control">
+                     </select>
+		</div>
+	  </div>
+	  
+	  <div class="form-group row">
+	  <label class="control-label col-sm-4"  for=""></label>
+		<div class="col-sm-8">
+		{% if title == "Add" %} 
+		  <input type="submit"  value="Add Details" class="btn btn-success"/>
+		{% else %}
+			<input type="submit"  value="Update Details" class="btn btn-success"/>
+		{% endif %}
+		</div>
+	  </div>
+	  
+	</form>
+</div>       
+ <div>
+
+ <br><br>
+<!--End of Form div--> 
+</div>
+<!-- End Of Profile Update-->
+	  
+  	 
+
+
+
+    </div>
+    <!-- /#page-content-wrapper -->
+
+  </div>
+  <!-- /#wrapper -->
+
+  <!-- Bootstrap core JavaScript 
+  <script src="jquery.min.js"></script>-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="static/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Menu Toggle Script -->
+  <script>
+    $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+    });
+	
+	
+	function pop_up(a){
+		if (confirm("Are you sure you want to cancel Appointment")) {
+				window.location.href="/delete_user/"+a;
+
+		} else {
+			window.location.href="{{ url_for('manage_patients')}}";
+		} 
+		
+	}
+	
+	function profile_update() {	
+		var state = "{{ data[6] }}";
+		var city = "{{ data[7] }}";
+		populate("state","city",state,city);		
+		var s1=document.getElementById("dept_data");
+		s1.value="{{ data[0] }}";
+	}
+	
+	window.onload=profile_update;
+  </script>
+
+</body>
+
+</html>

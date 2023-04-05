@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<title>Add_Department</title>
+  <link rel = "icon" href ="/static/images/logo.png" type = "image/x-icon">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Admin Dashboard</title>
+<style>
+	.dropdown:hover>.dropdown-menu{
+		display:block;
+	}
+	
+	
+</style>
+
+  
+		
+  <!-- Bootstrap core CSS 
+  <link href="bootstrap.min.css" rel="stylesheet">-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+  <!-- Custom styles for this template -->
+  <link href="static/css/simple-sidebar.css" rel="stylesheet">
+  <script src="static/js/states.js"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body style="background-color:#e9ecef69">
+
+
+  
+{% from "includes/_formhelpers.html" import render_field %} 
+  <div class="d-flex" id="wrapper">
+
+    <!-- Sidebar -->
+       <div class="bg-light border-right" id="sidebar-wrapper">
+      <div class="sidebar-heading" style="color:#6400aa;font-family:serif;"><h4>Admin Dashboard</h4></div>
+      <div class="list-group list-group-flush ">
+        <a href="/admin_dashboard" class="list-group-item list-group-item-action bg-light ">Dashboard</a>
+		<a href="#departments" class="list-group-item list-group-item-action bg-light" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Specalizations
+                &emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;<i class="fa fa-caret-down" aria-hidden="true"></i></a>
+					<ul class="collapse list-unstyled" id="departments">
+                        
+                        <li>
+                            <a href="/add_department" class="list-group-item list-group-item-action bg-light">&emsp;&emsp;Add Specalization</a>
+                        </li>
+						
+                        <li>
+                            <a href="/manage_departments" class="list-group-item list-group-item-action bg-light">&emsp;&emsp;Manage Specalizations</a>
+                        </li>
+                    </ul>
+		<a href="#doctors" class="list-group-item list-group-item-action bg-light" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Doctors
+                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<i class="fa fa-caret-down" aria-hidden="true"></i></a>
+					<ul class="collapse list-unstyled" id="doctors">
+                        
+                        <li>
+                            <a href="/add_doctor" class="list-group-item list-group-item-action bg-light">&emsp;&emsp;Add Doctor</a>
+                        </li>
+						
+                        <li>
+                            <a href="/manage_doctors" class="list-group-item list-group-item-action bg-light">&emsp;&emsp;Manage Doctors</a>
+                        </li>
+                    </ul>
+		<a href="#patients" class="list-group-item list-group-item-action bg-light" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"> Patients
+   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<i class="fa fa-caret-down" aria-hidden="true"></i></a>
+					<ul class="collapse list-unstyled" id="patients">
+                        <li>
+                            <a href="/manage_patients" class="list-group-item list-group-item-action bg-light">&emsp;&emsp; Manage Patients</a>
+                        </li>
+     
+                    </ul>
+			<a href="/manage_appointments" class="list-group-item list-group-item-action bg-light">Appointment History</a>
+		 <a href="/DoctorSessionLogs" class="list-group-item list-group-item-action bg-light">Doctor Session Logs</a>
+		  <a href="/UserSessionLogs" class="list-group-item list-group-item-action bg-light">Patient Session Logs</a>
+		   <a href="/contactus_list" class="list-group-item list-group-item-action bg-light">User Comments Logs</a>
+      </div>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+        <button class="btn btn-primary" id="menu-toggle"><i class="fa fa-bars" style="color:white"></i></button>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+            
+            <li class="nav-item">
+              <a class="nav-link" href="#"><h3><span style="color:#6400aa;font-family:serif">Hospital Management System</h3></a>
+            </li>
+			
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="fa-stack fa-2x"> <i class="fa fa-square fa-stack-2x text-primary"></i> <i class="fa fa-user fa-stack-1x fa-inverse"></i> </span>
+				<span style="font-size:20px;color:#640000">Admin</span></a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="" onclick="update_password();return false;" >Change Password</a>
+				<a class="dropdown-item" href="/logout" >Logout</a></div>
+            </li>
+			 <li class="nav-item">
+              <a class="nav-link" href="#"></a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+ {% include 'includes/_messages.html' %}
+	  
+
+	<!-- Profile Update-->
+<div>
+ <section id="page-title">
+							<div class="row">
+								<div class="col-sm-8">
+								<br>
+									<h4 class="mainTitle">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add Department Details</h4>
+	                            </div>
+							</div>
+						</section>
+
+				  <br>
+				<br>
+
+<div style="padding-left:200px;padding-right:300px">
+
+<div class="container" style="background-color:white; border: 1px solid green">
+
+	<form action="/add_department" method="post" enctype="multipart/form-data">
+	<br>
+	<div class="form-group row">
+	<div class="col-sm-3">
+	</div>
+	
+	<h4>&nbsp;&nbsp;&nbsp;&nbsp;Add Department</h4>
+	</div>
+	
+	  
+	  <div class="form-group row">
+		<label class="control-label col-sm-4" for="fullname">Department Name :</label>
+		<div class="col-sm-7">
+		  <input type="text" required placeholder="Enter Department Name" class="form-control" name="department_name"/>
+		</div>
+	  </div>
+	  
+	  <div class="form-group row">
+		<label class="control-label col-sm-4"  for="email">Select Image :</label>
+		<div class="col-sm-7">
+		  <input type="file" name="photo" class="btn btn-file" required />
+		  
+		  
+		</div>
+	  </div>
+	  
+	 
+	  
+	  <div class="form-group row">
+	  <label class="control-label col-sm-4"  for=""></label>
+		<div class="col-sm-8">
+			<input type="submit"  value="Add Department" class="btn btn-success"/>
+		</div>
+	  </div>
+	  
+	</form>
+</div>       
+ <div>
+
+ <br><br>
+<!--End of Form div--> 
+</div>
+<!-- End Of Profile Update-->
+	  
+  	 
+
+
+
+    </div>
+    <!-- /#page-content-wrapper -->
+
+  </div>
+  <!-- /#wrapper -->
+
+  <!-- Bootstrap core JavaScript 
+  <script src="jquery.min.js"></script>-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="static/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Menu Toggle Script -->
+  <script>
+    $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+    });
+	
+	
+	
+  </script>
+
+</body>
+
+</html>

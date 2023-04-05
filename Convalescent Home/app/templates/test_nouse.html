@@ -1,0 +1,12 @@
+<html>
+<body>
+
+
+ <select >
+ <option value="">--SELECT--</option>
+ {% for row in data %}
+         <option value="{{ row[1] }}">{{ row[1] }}</option>  
+         {% endfor %}
+				</select>
+</body>
+</html>

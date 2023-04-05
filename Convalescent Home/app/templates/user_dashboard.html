@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>User_Dashboard</title>
+	 <link rel = "icon" href ="static/images/logo.png" type = "image/x-icon">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>User Dashboard</title>
+<style>
+	.dropdown:hover>.dropdown-menu{
+		display:block;
+	}
+	
+	
+</style>
+
+  
+		
+  <!-- Bootstrap core CSS 
+  <link href="bootstrap.min.css" rel="stylesheet">-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+  <!-- Custom styles for this template -->
+  <link href="static/css/simple-sidebar.css" rel="stylesheet">
+  <script src="static/js/states.js"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body style="background-color:#e9ecef69" >
+
+
+  
+{% from "includes/_formhelpers.html" import render_field %} 
+  <div class="d-flex" id="wrapper">
+
+    <!-- Sidebar -->
+    <div class="bg-light border-right" id="sidebar-wrapper">
+      <div class="sidebar-heading" style="color:#6400aa;font-family:serif;"><h4>User Dashboard</h4></div>
+      <div class="list-group list-group-flush ">
+        <a href="javascript:user_dashboard()" class="list-group-item list-group-item-action bg-light ">Dashboard</a>
+        <a href="http://127.0.0.1:5000/department_page" class="list-group-item list-group-item-action bg-light">Book Appointment</a>
+        <a href="/appointment_history" class="list-group-item list-group-item-action bg-light">Appointment History</a>
+		<a href="/view_prescrptions" class="list-group-item list-group-item-action bg-light">Prescription History</a>
+      </div>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+        <button class="btn btn-primary" id="menu-toggle"><i class="fa fa-bars" style="color:white"></i></button>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+            
+            <li class="nav-item">
+              <a class="nav-link" href="#"><h3><span style="color:#6400aa;font-family:serif">Hospital Management System</h3></a>
+            </li>
+			
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="fa-stack fa-2x"> <i class="fa fa-square fa-stack-2x text-primary"></i> <i class="fa fa-user fa-stack-1x fa-inverse"></i> </span>
+				<span style="font-size:20px;color:#640000">{{ session['username'] }}</span></a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="http://127.0.0.1:5000/update_form">My Profile</a>
+                <a class="dropdown-item" href="/update_password">Change Password</a>
+				<a class="dropdown-item" href="/logout" >Logout</a>
+            </li>
+			 <li class="nav-item">
+              <a class="nav-link" href="#"></a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+ {% include 'includes/_messages.html' %}
+	  
+<!-- User dashboard-->
+<div id="user_dashboard" >
+                  <section id="page-title">
+							<div class="row">
+								<div class="col-sm-8">
+								<br>
+									<h4 class="mainTitle">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dashboard</h4>
+	                            </div>
+							</div>
+						</section>
+
+				  <br>
+				<br>
+		
+									<div class="container-fluid container-fullw bg-white">
+								<div class="row">
+									<div class="col-sm-4">
+										<div class="panel panel-white no-radius text-center">
+											<div class="panel-body">
+											<br>
+												<span class="fa-stack fa-2x"> <i class="fa fa-square fa-stack-2x text-primary"></i> <i class="fa fa-smile-o fa-stack-1x fa-inverse"></i> </span>
+												<h2 class="StepTitle">My Profile</h2>
+												
+												<p class="links cl-effect-1">
+													<a href="http://127.0.0.1:5000/update_form">
+														Update Profile
+													</a>
+												</p>
+												<br>
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-4">
+										<div class="panel panel-white no-radius text-center">
+											<div class="panel-body">
+											<br>
+												<span class="fa-stack fa-2x"> <i class="fa fa-square fa-stack-2x text-primary"></i> <i class="fa fa-paperclip fa-stack-1x fa-inverse"></i> </span>
+												<h2 class="StepTitle">My Appointments</h2>
+											
+												<p class="cl-effect-1">
+													<a href="/appointment_history">
+														View Appointment History
+													</a>
+												</p>
+												<br>
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-4">
+										<div class="panel panel-white no-radius text-center">
+											<div class="panel-body">
+											<br>
+												<span class="fa-stack fa-2x"> <i class="fa fa-square fa-stack-2x text-primary"></i> <i class="fa fa-terminal fa-stack-1x fa-inverse"></i> </span>
+												<h2 class="StepTitle"> Book My Appointment</h2>
+												
+												<p class="links cl-effect-1">
+													<a href="http://127.0.0.1:5000/department_page">
+														Book Appointment
+													</a>
+												</p>
+												<br>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+</div>
+<!-- End OF User dashboard-->
+
+
+
+<!--Update Password--->
+<div id="update_password"  style="display:none">
+ <section id="page-title">
+							<div class="row">
+								<div class="col-sm-8">
+								<br>
+									<h4 class="mainTitle">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Update_Password</h4>
+	                            </div>
+							</div>
+						</section>
+
+				  <br>
+				<br>
+
+<div style="padding-left:100px;padding-right:300px">
+<div class="container" style="background-color:white; border: 1px solid green;">
+
+	<form action="/update_password" method="post">
+	<br>
+	<div class="form-group row">
+	<div class="col-sm-3">
+	</div>
+	
+	<h4>&nbsp;&nbsp;&nbsp;&nbsp;Update Password</h4>
+	</div>
+	  <div class="form-group row">
+		<label class="control-label col-sm-3" for="oldpass">Old Password:</label>
+		<div class="col-sm-8">
+		  {{render_field(form.oldpass, class_="form-control" ,placeholder="Enter Old Password")}}
+		</div>
+	  </div>
+	  
+	  <div class="form-group row">
+		<label class="control-label col-sm-3"  for="newpass">New Password:</label>
+		<div class="col-sm-8">
+		  {{render_field(form.newpass, class_="form-control" ,placeholder="Enter New Password")}}
+		</div>
+	  </div>
+	  
+	  <div class="form-group row">
+		<label class="control-label col-sm-3"  for="confpass">Confirm Password:</label>
+		<div class="col-sm-8">
+		 {{render_field(form.confpass, class_="form-control" ,placeholder="Confirm password")}}
+		</div>
+	  </div>
+	  
+	  
+	  <div class="form-group row">
+		<label class="control-label col-sm-4"  for="Address"></label>
+		<div class="col-sm-8">
+		  <input type="submit" name="update" value="Update" class="btn btn-success"/>
+		</div>
+	  </div>
+	  
+	</form>
+</div>       
+ <div>
+
+<!--End of Form div--> 
+</div>
+<!--End of Update form-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+    <!-- /#page-content-wrapper -->
+
+  </div>
+  <!-- /#wrapper -->
+
+  <!-- Bootstrap core JavaScript 
+  <script src="jquery.min.js"></script>-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="static/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Menu Toggle Script -->
+  <script>
+    $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+    });
+	
+	
+	function update_password(){
+		document.getElementById("update_password").style.display= "block"
+		document.getElementById("user_dashboard").style.display= "none"
+	}
+	function user_dashboard(){
+		document.getElementById("user_dashboard").style.display= "block"
+		document.getElementById("update_password").style.display= "none"
+		
+	}
+	
+	
+	function start(){
+		id="{{ id }}"
+	
+		if (id == "dashboard"){
+		user_dashboard();
+		}
+		if (id == "password_update"){
+		update_password();
+		}
+	}
+	<!--always onload function should be at end->
+	window.onload = start;
+  </script>
+
+</body>
+
+</html>

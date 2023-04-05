@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+	<title>Display_Prescription</title>
+	 <link rel = "icon" href ="../static/images/logo.png" type = "image/x-icon">
+<style>
+	.dropdown:hover>.dropdown-menu{
+		display:block;
+	}
+	
+	fieldset.scheduler-border {
+    border: 1px groove #ddd !important;
+    padding: 0 1.4em 1.4em 1.4em !important;
+    margin: 0 0 1.5em 0 !important;
+    -webkit-box-shadow:  0px 0px 0px 0px #000;
+            box-shadow:  0px 0px 0px 0px #000;
+}
+
+legend.scheduler-border {
+    font-size: 1.0em !important;
+    font-weight: bold !important;
+    text-align: left !important;
+	 width:inherit; /* Or auto */
+    padding:0 10px; /* To give a bit of padding on the left and right */
+    border-bottom:none;
+}
+	
+</style>
+
+
+  
+  
+		
+  <!-- Bootstrap core CSS 
+  <link href="bootstrap.min.css" rel="stylesheet">-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+  <!-- Custom styles for this template -->
+  <link href="../static/css/simple-sidebar.css" rel="stylesheet">
+  <script src="../static/js/states.js"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
+  
+  
+</head>
+
+<body style="background-color:#e9ecef69" >
+{% from "includes/_formhelpers.html" import render_field %} 
+  <div class="d-flex" id="wrapper">
+
+    <!-- Sidebar -->
+    <div class="bg-light border-right" id="sidebar-wrapper">
+      <div class="sidebar-heading" style="color:#6400aa;font-family:serif;"><h4>Doctor Dashboard</h4></div>
+      <div class="list-group list-group-flush ">
+        <a href="http://127.0.0.1:5000/doctor/doctor_dashboard?navigate_id=doctor_dashboard" class="list-group-item list-group-item-action bg-light ">Dashboard</a>
+        <a href="{{ url_for('doctor_appointments') }}" class="list-group-item list-group-item-action bg-light">Appointment History</a>
+		<a href="/prescription_history" class="list-group-item list-group-item-action bg-light">Prescription History</a>
+	  </div>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+        <button class="btn btn-primary" id="menu-toggle"><i class="fa fa-bars" style="color:white"></i></button>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+            
+            <li class="nav-item">
+              <a class="nav-link" href="#"><h3><span style="color:#6400aa;font-family:serif">Hospital Management System</h3></a>
+            </li>
+			
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="fa-stack fa-2x"> <i class="fa fa-square fa-stack-2x text-primary"></i> <i class="fa fa-user fa-stack-1x fa-inverse"></i> </span>
+				<span style="font-size:20px;color:#640000">{{ session['doctorname'] }}</span></a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{{ url_for('Update_doctorform') }}">My Profile</a>
+                <a class="dropdown-item" href="http://127.0.0.1:5000/doctor/doctor_dashboard?navigate_id=update_password" >Change Password</a>
+				<a class="dropdown-item" href="/logout" >Logout</a>
+            </li>
+			 <li class="nav-item">
+              <a class="nav-link" href="#"></a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+ {% include 'includes/_messages.html' %}
+	  
+
+ <br>
+									<h4 class="mainTitle">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Prescription Notes</h4>
+	                            
+	  <br>
+	 
+	  <div class="container-fluid">
+
+	<div>
+	  
+		 {{ data[0] | safe}}
+		  
+
+	</div>
+	 <br>
+	  <div class="col-lg-4">
+		<a href="javascript:printDiv()" class="btn btn-info">Print Prescription</a>
+				
+	</div>
+
+</div>       
+
+ 
+ 
+ 
+ 
+ </div>
+    <!-- /#page-content-wrapper -->
+
+  </div>
+  <!-- /#wrapper -->
+
+  <!-- Bootstrap core JavaScript 
+  <script src="jquery.min.js"></script>-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="../static/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.ckeditor.com/4.13.0/basic/ckeditor.js"></script>
+	<script type="text/javascript">
+	CKEDITOR.replace('editor',{
+height: '400px',
+
+	});
+	
+	</script>
+  <!-- Menu Toggle Script -->
+  <script>
+    $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+    });
+	
+	function printDiv() { 
+			  window.print();
+		} 
+  </script>
+
+</body>
+
+</html>
